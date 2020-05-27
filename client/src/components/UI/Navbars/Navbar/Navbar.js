@@ -1,18 +1,12 @@
-// Навбар для главной страницы
-// Прозрачный с абсолютной позицией
-// Один параметр - цвет
-
 import React from 'react'
 import '../Bar.scss'
 import { NavLink } from 'react-router-dom'
 
-const Mainbar = props => {
+const Navbar = props => {
 
 	return (
-		<div className='Mainbar'
-			style={{
-				position: 'absolute'
-			}}
+		<div className='Navbar'
+			style={{position: 'relative'}}
 		>
 			<div className='LeftButtons'>
 				<NavLink to='/' className='NavLink'>Главная</NavLink>
@@ -29,11 +23,9 @@ const Mainbar = props => {
 					<div>auth</div> :
 					<NavLink to='/auth' className='NavLink'>Войти</NavLink>
 				}
-
-
 			</div>
 		</div>
 	)
 }
 
-export default Mainbar
+export default Navbar
