@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom'
 const Mainbar = props => {
 
 	return (
-		<div className='Mainbar'
+		<div className='Bar'
 			style={{
 				position: 'absolute'
 			}}

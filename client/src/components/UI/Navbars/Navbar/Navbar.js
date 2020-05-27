@@ -5,8 +5,11 @@ import { NavLink } from 'react-router-dom'
 const Navbar = props => {
 
 	return (
-		<div className='Navbar'
-			style={{position: 'relative'}}
+		<div className='Bar'
+			style={{
+				position: 'relative',
+				background: 'blue'
+			}}
 		>
 			<div className='LeftButtons'>
 				<NavLink to='/' className='NavLink'>Главная</NavLink>
