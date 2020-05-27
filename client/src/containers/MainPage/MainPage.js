@@ -9,7 +9,7 @@ const MainPage = () => {
 			<Mainbar />
 			<Vanta>
 				<div className='TheBestName'>
-					<h1>Илья Зайцев</h1>
+					<h1>Loren Ipsum</h1>
 				</div>
 			</Vanta>
 			<h1>zaytsev.xyz</h1>

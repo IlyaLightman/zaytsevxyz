@@ -4,13 +4,24 @@
 
 import React from 'react'
 import './Mainbar.scss'
+import { NavLink } from 'react-router-dom'
 
 const Mainbar = () => {
 
 	return (
 		<div className='Mainbar'>
-			<p>Всякие пункты меню</p>
-			<p>Много пунктов меню</p>
+			<div className='LeftButtons'>
+				<NavLink to='/' className='NavLink'>Главная</NavLink>
+				<NavLink to='/blog' className='NavLink'>Блог</NavLink>
+				<NavLink to='/projects' className='NavLink'>Проекты</NavLink>
+			</div>
+			<div className='Logo'>
+				<h3>zaytsev.xyz</h3>
+			</div>
+			<div className='RightButtons'>
+				<NavLink to='/shop' className='NavLink'>Магазин</NavLink>
+				<NavLink to='/auth' className='NavLink'>Войти</NavLink>
+			</div>
 		</div>
 	)
 }

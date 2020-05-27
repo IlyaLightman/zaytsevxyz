@@ -15,7 +15,7 @@ const Vanta = props => {
 				mouseControls: true,
 				touchControls: true,
 				minHeight: 500.00,
-				minWidth: 500.00,
+				// minWidth: 500.00,
 				scale: 1.00,
 				scaleMobile: 1.00,
 				color: 0x4b78,
@@ -27,7 +27,7 @@ const Vanta = props => {
 			if (vantaEffect) vantaEffect.destroy()
 		}
 	}, [vantaEffect])
-	return <div ref={myRef}>
+	return <div ref={myRef} className='Vanta'>
 		{ props.children }
 	</div>
 }

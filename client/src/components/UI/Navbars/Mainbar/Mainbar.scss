@@ -1,4 +1,71 @@
 .Mainbar {
   position: absolute;
   z-index: 5;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+
+  .LeftButtons {
+    display: flex;
+    justify-content: flex-start;
+    width: 40%;
+    margin-left: 20px;
+    margin-right: auto;
+
+    .NavLink {
+      margin: 0 5% 0 5%;
+      color: white;
+      font-size: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      text-decoration: none;
+    }
+  }
+
+  .Logo {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 20%;
+
+    h3 {
+      font-family: "Segoe UI";
+      color: #9cdfe5;
+      margin-top: 0;
+      cursor: default;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+    .Logo {
+      display: none;
+    }
+
+    .LeftButtons {
+      width: 50%;
+      flex-direction: column;
+    }
+
+    .RightButtons {
+      width: 50%;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+    }
+  }
+
+  .RightButtons {
+    display: flex;
+    justify-content: flex-end;
+    width: 40%;
+    margin-right: 20px;
+    margin-left: auto;
+
+    .NavLink {
+      margin: 0 5% 0 5%;
+      color: white;
+      font-size: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      text-decoration: none;
+    }
+  }
 }
