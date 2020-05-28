@@ -2,11 +2,13 @@
 // Прозрачный с абсолютной позицией
 // Один параметр - цвет
 
-import React from 'react'
+import React, { useContext } from 'react'
 import '../Bar.scss'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../../../context/AuthContext'
 
 const Mainbar = props => {
+	const { isAuthenticated } = useContext(AuthContext)
 
 	return (
 		<div className='Bar'
@@ -25,7 +27,7 @@ const Mainbar = props => {
 			<div className='RightButtons'>
 				<NavLink to='/shop' className='NavLink'>Магазин</NavLink>
 
-				{ props.isAuthenticated ?
+				{ isAuthenticated ?
 					<div>auth</div> :
 					<NavLink to='/auth' className='NavLink'>Войти</NavLink>
 				}

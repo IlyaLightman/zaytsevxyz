@@ -23,15 +23,18 @@ const store = createStore(
     )
 )
 
+const app = (
+        <React.StrictMode>
+            <Provider store={ store }>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </Provider>
+        </React.StrictMode>
+)
+
 ReactDOM.render(
-    <React.StrictMode>
-      <Provider store={ store }>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </Provider>
-    </React.StrictMode>,
-    document.getElementById('root')
+    app, document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change

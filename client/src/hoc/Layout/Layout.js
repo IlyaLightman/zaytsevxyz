@@ -1,12 +1,20 @@
 import React from 'react'
 import Navbar from '../../components/UI/Navbars/Navbar/Navbar'
 
+const notForRenderPathnames = [
+	'/'
+]
+
 const Layout = props => {
+	console.log(props.location.pathname)
+
+	const shouldNavbarRender = !notForRenderPathnames.includes(
+		props.location.pathname)
 
 	return (
 		<React.Fragment>
 			{
-				props.showBar ?
+				shouldNavbarRender ?
 					<Navbar
 						isAuthenticated={props.isAuthenticated} />
 					: null
