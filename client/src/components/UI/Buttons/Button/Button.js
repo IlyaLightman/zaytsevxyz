@@ -16,7 +16,8 @@ const Button = props => {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				margin: '25px 10px 25px 10px',
+				margin: '25px 12px 25px 12px',
+				padding: '0 12px 0 12px',
 				maxWidth: '150px',
 				height: '50px',
 				background: theme === 'light' ?

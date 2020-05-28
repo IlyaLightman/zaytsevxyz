@@ -6,7 +6,9 @@ const Input = props => {
 		title,
 		placeholder,
 		invalid,
-		onChange
+		onChange,
+		type,
+		value
 	} = props
 
 	return (
@@ -26,11 +28,13 @@ const Input = props => {
 				style={{
 					border: '1px solid gray',
 					borderRadius: '10px',
-					padding: '5px',
+					padding: '5px 5px 5px 10px',
 					width: '225px',
 					height: '25px',
 					outline: 'none'
 				}}
+				value={value}
+				type={type}
 				placeholder={placeholder}
 				onChange={onChange}
 			/>
