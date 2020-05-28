@@ -1,12 +1,6 @@
 import React from 'react'
 import Radium from 'radium'
 
-let defaultSettings = {
-
-}
-
-
-
 // Общая кнопка сайта
 const Button = props => {
 	const {
@@ -22,7 +16,7 @@ const Button = props => {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				margin: '25px',
+				margin: '25px 10px 25px 10px',
 				maxWidth: '150px',
 				height: '50px',
 				background: theme === 'light' ?

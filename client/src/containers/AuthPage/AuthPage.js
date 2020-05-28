@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './AuthPage.scss'
 import Button from '../../components/UI/Buttons/Button/Button'
+import Input from '../../components/UI/Inputs/Input/Input'
 
 const AuthPage = () => {
 	// 0 - login, 1 - registration
@@ -8,14 +9,28 @@ const AuthPage = () => {
 
 	const login = (
 		<div className='Form'>
-			<p>login</p>
-			<button onClick={() => setPage(1)}>к регистрации</button>
+			<p> &nbsp; </p>
+
+			<Input
+				title='Почта'
+				placeholder='Введите Email'
+				invalid={false}
+				onChange
+			/>
+
+			<Input
+				title='Пароль'
+				placeholder='Введите пароль'
+				invalid={true}
+				onChange
+			/>
 
 			<div className='Buttons'>
 				<Button
 					type='primary'
 					theme='light'
 					title='К регистрации'
+					onClick={() => setPage(1)}
 				/>
 
 				<Button
@@ -37,8 +52,12 @@ const AuthPage = () => {
 
 	return (
 		<div className='AuthPage'>
-			{page === 0 ? <h2>Войдите</h2>
-				: <h2>Зарегистрируйтесь</h2>}
+			{page === 0 ? <h2 style={{fontFamily: 'Bahnschrift',
+				fontSize: '50px', marginBottom: '5px'}}
+				>Войдите</h2>
+				: <h2 style={{fontFamily: 'Bahnschrift',
+				fontSize: '50px', marginBottom: '5px'}}
+				>Зарегистрируйтесь</h2>}
 
 			{page === 0 ? login : register}
 
