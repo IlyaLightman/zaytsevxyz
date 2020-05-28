@@ -1,0 +1,9 @@
+.AuthPage {
+  display: flex;
+  flex-direction: column;
+
+  .Selection {
+    display: flex;
+    flex-direction: row;
+  }
+}

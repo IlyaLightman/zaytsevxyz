@@ -5,6 +5,7 @@ import { AuthContext } from './context/AuthContext'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import MainPage from './containers/MainPage/MainPage'
 import Layout from './hoc/Layout/Layout'
+import AuthPage from './containers/AuthPage/AuthPage'
 
 function App() {
 	const { token, login, logout, userId, ready } = useAuth()
@@ -16,9 +17,9 @@ function App() {
 			token, login, logout, userId, isAuthenticated
 		}}>
 			<Switch>
-				<Layout
-					showBar={true}>
-					<Route path='/' component={MainPage} />
+				<Layout>
+					<Route path='/auth' component={AuthPage} />
+					<Route exact path='/' component={MainPage} />
 					<Redirect to='/' />
 				</Layout>
 			</Switch>
