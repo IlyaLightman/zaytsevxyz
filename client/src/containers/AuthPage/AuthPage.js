@@ -1,20 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './AuthPage.scss'
 
 const AuthPage = () => {
+	// 0 - login, 1 - registration
+	const [page, setPage] = useState(0)
+
+	const login = (
+		<div>
+			<p>login</p>
+			<button onClick={() => setPage(1)}>к регистрации</button>
+		</div>
+	)
+
+	const register = (
+		<div>
+			<p>register</p>
+			<button onClick={() => setPage(0)}>ко входу</button>
+		</div>
+	)
 
 	return (
 		<div className='AuthPage'>
-			<h2>Уга вуга</h2>
-			<div className='Selection'>
-				<div className='LoginSelect'>
-					<p>Логин</p>
-				</div>
+			{page === 0 ? <h2>Войдите</h2>
+				: <h2>Зарегистрируйтесь</h2>}
 
-				<div className='RegSelect'>
-					<p>Регистрация</p>
-				</div>
-			</div>
+			{page === 0 ? login : register}
+
 			<p>Зарегистрируйтесь, чтобы писать комментарии... или да</p>
 		</div>
 	)
