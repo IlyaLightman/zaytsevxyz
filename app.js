@@ -6,6 +6,8 @@ const app = express()
 
 app.use(express.json({ extended: true }))
 
+app.use('/api/auth', require('./routes/auth.routes'))
+
 const PORT = config.get('PORT')
 
 async function start() {

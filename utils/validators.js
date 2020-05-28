@@ -2,7 +2,7 @@ const { body } = require('express-validator')
 const User = require('../models/User')
 
 exports.registerValidators = [
-	body('email', 'Incorrect Email or user with this Email already exists')
+	body('email', 'Неправильная почта или пользователь уже существует')
 		.isEmail()
 		.custom(async (value, { req }) => {
 			try {
@@ -15,14 +15,14 @@ exports.registerValidators = [
 				console.log(err)
 			}
 		}),
-	body('password', 'The password has to have minimum six symbols')
+	body('password', 'В пароле должно быть минмиум 6 символов')
 		.isLength({ min: 6, max: 26 })
 		.isAlphanumeric()
 		.trim(),
-	body('nickname', 'This nickname is incorrect')
+	body('nickname', 'В имени должно быть минимум 2 символа')
 		.isLength({ min: 2, max: 16 })
 		.isAlphanumeric(),
-	body('confirm', `Passwords don't match`)
+	body('confirm', `Пароли не совпадают`)
 		.custom((value, { req }) => {
 			if (value !== req.body.password) {
 				throw new Error(`Passwords don't match`)
@@ -33,7 +33,7 @@ exports.registerValidators = [
 ]
 
 exports.loginValidators = [
-	body('email', 'Incorrect Email')
+	body('email', 'Неверная почта')
 		.isEmail()
 		.custom(async (value, { req }) => {
 			try {
@@ -46,7 +46,7 @@ exports.loginValidators = [
 			}
 		})
 		.normalizeEmail(),
-	body('password', 'Incorrect password')
+	body('password', 'Невеогый пароль')
 		.isLength({ min: 6, max: 26 })
 		.isAlphanumeric()
 		.trim()

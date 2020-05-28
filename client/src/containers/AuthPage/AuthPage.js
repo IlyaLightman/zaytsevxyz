@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './AuthPage.scss'
 import Button from '../../components/UI/Buttons/Button/Button'
 import Input from '../../components/UI/Inputs/Input/Input'
+import useHttp from '../../hooks/http.hook'
 
 const AuthPage = () => {
 	// 0 - login, 1 - registration
@@ -12,16 +13,29 @@ const AuthPage = () => {
 	const [invalidFields, setInvalidFields] = useState(
 		[]
 	)
+	const [backendValidationError, setBackendValidationError] =
+		useState('')
+
+	const { /*loading,*/ request, error, clearError } = useHttp()
+
+	useEffect(() => {
+		if (form.email || form.password ||
+			form.confirm || form.nickname)
+		setInvalidFields(formValidator())
+		}, [form])
 
 	const changeHandler = (field, value) => {
+		clearError()
 		setForm({ ...form, [field]: value})
-		setInvalidFields(formValidator())
 	}
-	console.log(invalidFields)
-	console.log(form)
 
-	const registerHandler = () => {
+	const registerHandler = async () => {
+		const data = await request(
+			'/api/auth/register', 'POST', { ...form })
 
+		console.log(data)
+		console.log(error)
+		if (data.errors) setBackendValidationError(data.errors[0].msg)
 	}
 
 	const formValidator = () => {
@@ -45,8 +59,6 @@ const AuthPage = () => {
 
 	const login = (
 		<div className='Form'>
-			<p> &nbsp; </p>
-
 			<Input
 				title='Почта'
 				placeholder='Введите Email'
@@ -87,8 +99,6 @@ const AuthPage = () => {
 
 	const register = (
 		<div className='Form'>
-			<p> &nbsp; </p>
-
 			<Input
 				title='Почта'
 				placeholder='Введите Email'
@@ -120,8 +130,8 @@ const AuthPage = () => {
 			/>
 
 			<Input
-				title='Ник'
-				placeholder='Введите никнейм'
+				title='Имя'
+				placeholder='Введите имя'
 				type='text'
 				invalid={invalidFields.includes('nickname')}
 				value={form.nickname}
@@ -141,6 +151,7 @@ const AuthPage = () => {
 					type='primary'
 					theme='dark'
 					title='Зарегистрироваться'
+					onClick={registerHandler}
 				/>
 			</div>
 		</div>
@@ -154,15 +165,19 @@ const AuthPage = () => {
 	return (
 		<div className='AuthPage'>
 			{page === 0 ? <h2 style={{fontFamily: 'Bahnschrift',
-				fontSize: '50px', marginBottom: '5px'}}
+				fontSize: '450%', marginBottom: '5px'}}
 				>Войдите</h2>
 				: <h2 style={{fontFamily: 'Bahnschrift',
-				fontSize: '50px', marginBottom: '5px'}}
+				fontSize: '450%', marginBottom: '5px'}}
 				>Зарегистрируйтесь</h2>}
+
+			<p style={{color: 'rgb(255,118,118)'}}
+			> &nbsp; {`${backendValidationError}`} </p>
 
 			{page === 0 ? login : register}
 
-			<p>Зарегистрируйтесь, чтобы писать комментарии... или да</p>
+			<p style={{color: 'gray'}}
+			>Зарегистрируйтесь, чтобы писать комментарии... или да</p>
 		</div>
 	)
 }
