@@ -1,6 +1,0 @@
-{
-  "PORT": 5000,
-  "jwtSecret": "oh it is on the git",
-  "MONGO_URI": "mongodb://127.0.0.1:27017/xyz",
-  "baseUrl": "http://localhost:5000"
-}
