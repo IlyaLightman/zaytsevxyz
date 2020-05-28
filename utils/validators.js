@@ -8,7 +8,7 @@ exports.registerValidators = [
 			try {
 				const user = await User.findOne({ email: value })
 				if (user) {
-					return Promise.reject('User with this Email already exists')
+					return Promise.reject('Пользователь с такой почтой уже есть')
 				}
 				return true
 			} catch (err) {
@@ -25,7 +25,7 @@ exports.registerValidators = [
 	body('confirm', `Пароли не совпадают`)
 		.custom((value, { req }) => {
 			if (value !== req.body.password) {
-				throw new Error(`Passwords don't match`)
+				throw new Error(`Пароли не совпадают`)
 			}
 			return true
 		})
@@ -39,14 +39,14 @@ exports.loginValidators = [
 			try {
 				const user = await User.findOne({ email: value })
 				if (!user) {
-					return Promise.reject('There is no user with this Email')
+					return Promise.reject('Нет пользователя с такой почтой')
 				}
 			} catch (err) {
 				console.log(err)
 			}
 		})
 		.normalizeEmail(),
-	body('password', 'Невеогый пароль')
+	body('password', 'Неверный пароль')
 		.isLength({ min: 6, max: 26 })
 		.isAlphanumeric()
 		.trim()

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './AuthPage.scss'
 import Button from '../../components/UI/Buttons/Button/Button'
 import Input from '../../components/UI/Inputs/Input/Input'
 import useHttp from '../../hooks/http.hook'
+import { AuthContext } from '../../context/AuthContext'
 
 const AuthPage = () => {
 	// 0 - login, 1 - registration
@@ -17,7 +18,8 @@ const AuthPage = () => {
 		useState('')
 	const [successCreation, setSuccess] = useState(false)
 
-	const { /*loading,*/ request, error, clearError } = useHttp()
+	const { /*loading,*/ request, /*error,*/ clearError } = useHttp()
+	const auth = useContext(AuthContext)
 
 	useEffect(() => {
 		if (form.email || form.password ||
@@ -34,11 +36,20 @@ const AuthPage = () => {
 		const data = await request(
 			'/api/auth/register', 'POST', { ...form })
 
-		console.log(data)
-		console.log(error)
 		if (data.errors) return setBackendValidationError(
 			data.errors[0].msg)
 		setSuccess(true)
+	}
+
+	const loginHandler = async () => {
+		const data = await request(
+			'/api/auth/login', 'POST', { ...form })
+		if (data.errors) {
+			setBackendValidationError(data.errors[0].msg)
+			return
+		}
+
+		auth.login(data.token, data.userId)
 	}
 
 	const formValidator = () => {
@@ -94,6 +105,7 @@ const AuthPage = () => {
 					type='primary'
 					theme='dark'
 					title='Войти'
+					onClick={loginHandler}
 				/>
 			</div>
 

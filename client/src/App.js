@@ -8,7 +8,7 @@ import Layout from './hoc/Layout/Layout'
 import AuthPage from './containers/AuthPage/AuthPage'
 
 function App() {
-	const { token, login, logout, userId, ready } = useAuth()
+	const { token, login, logout, userId/*, ready */ } = useAuth()
 	// const isAuthenticated = !!token
 	const isAuthenticated = false
 
