@@ -15,6 +15,7 @@ const AuthPage = () => {
 	)
 	const [backendValidationError, setBackendValidationError] =
 		useState('')
+	const [successCreation, setSuccess] = useState(false)
 
 	const { /*loading,*/ request, error, clearError } = useHttp()
 
@@ -35,7 +36,9 @@ const AuthPage = () => {
 
 		console.log(data)
 		console.log(error)
-		if (data.errors) setBackendValidationError(data.errors[0].msg)
+		if (data.errors) return setBackendValidationError(
+			data.errors[0].msg)
+		setSuccess(true)
 	}
 
 	const formValidator = () => {
@@ -171,8 +174,10 @@ const AuthPage = () => {
 				fontSize: '450%', marginBottom: '5px'}}
 				>Зарегистрируйтесь</h2>}
 
-			<p style={{color: 'rgb(255,118,118)'}}
-			> &nbsp; {`${backendValidationError}`} </p>
+			<p style={{color: successCreation
+					? 'green' : 'rgb(255,118,118)'}}
+			> &nbsp; {`${successCreation ?
+				'Пользователь создан' : backendValidationError}`} </p>
 
 			{page === 0 ? login : register}
 
