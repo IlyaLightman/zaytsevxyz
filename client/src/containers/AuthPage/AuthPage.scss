@@ -1,9 +1,20 @@
 .AuthPage {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
-  .Selection {
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+
+  .Buttons {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+
   }
 }
