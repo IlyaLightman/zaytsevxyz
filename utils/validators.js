@@ -44,8 +44,7 @@ exports.loginValidators = [
 			} catch (err) {
 				console.log(err)
 			}
-		})
-		.normalizeEmail(),
+		}),
 	body('password', 'Неверный пароль')
 		.isLength({ min: 6, max: 26 })
 		.isAlphanumeric()

@@ -24,10 +24,18 @@ router.post('/register', registerValidators,
 			const { email, password, nickname } = req.body
 
 			const candidateByEmail = await User.findOne({ email })
-			const candidateByNickName = await User.findOne({ nickname })
-			if (candidateByEmail || candidateByNickName) {
+			if (candidateByEmail) {
 				return res.status(400).json({
+					errors: [{ msg: 'Пользователь с такой почтой уже существует' }],
+					message: 'Пользователь с такой почтой уже существует'
+				})
+			}
 
+			const candidateByNickname = await User.findOne({ nickname })
+			if (candidateByNickname) {
+				return res.status(400).json({
+					errors: [{ msg: 'Пользователь с таким именем уже существует' }],
+					message: 'Пользователь с таким именем уже существует'
 				})
 			}
 
@@ -50,7 +58,8 @@ router.post('/login', loginValidators,
 			const errors = validationResult(req)
 			if (!errors.isEmpty()) {
 				return res.status(400).json({
-
+					errors: errors.array(),
+					message: 'Incorrect registration data'
 				})
 			}
 
@@ -64,7 +73,9 @@ router.post('/login', loginValidators,
 			const isMatch = await compare(password, user.password)
 			if (!isMatch) {
 				return res.status(400).json({
-
+					errors: [{
+						msg: 'Неверный пароль' }],
+					message: 'Неверный пароль'
 				})
 			}
 

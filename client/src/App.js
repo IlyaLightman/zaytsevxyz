@@ -9,8 +9,7 @@ import AuthPage from './containers/AuthPage/AuthPage'
 
 function App() {
 	const { token, login, logout, userId/*, ready */ } = useAuth()
-	// const isAuthenticated = !!token
-	const isAuthenticated = false
+	const isAuthenticated = !!token
 
 	return (
 		<AuthContext.Provider value={{

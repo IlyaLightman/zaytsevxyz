@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './AuthPage.scss'
+import { Redirect } from 'react-router-dom'
 import Button from '../../components/UI/Buttons/Button/Button'
 import Input from '../../components/UI/Inputs/Input/Input'
 import useHttp from '../../hooks/http.hook'
@@ -16,9 +17,10 @@ const AuthPage = () => {
 	)
 	const [backendValidationError, setBackendValidationError] =
 		useState('')
-	const [successCreation, setSuccess] = useState(false)
+	// const [successCreation, setSuccess] = useState(false)
+	const [redirect, setRedirect] = useState(false)
 
-	const { /*loading,*/ request, /*error,*/ clearError } = useHttp()
+	const { loading, request, /*error,*/ clearError } = useHttp()
 	const auth = useContext(AuthContext)
 
 	useEffect(() => {
@@ -36,9 +38,13 @@ const AuthPage = () => {
 		const data = await request(
 			'/api/auth/register', 'POST', { ...form })
 
-		if (data.errors) return setBackendValidationError(
-			data.errors[0].msg)
-		setSuccess(true)
+		if (data.errors) {
+			setBackendValidationError(data.errors[0].msg)
+			return
+		}
+		// setSuccess(true)
+
+		await loginHandler()
 	}
 
 	const loginHandler = async () => {
@@ -50,6 +56,7 @@ const AuthPage = () => {
 		}
 
 		auth.login(data.token, data.userId)
+		setRedirect(true)
 	}
 
 	const formValidator = () => {
@@ -145,8 +152,8 @@ const AuthPage = () => {
 			/>
 
 			<Input
-				title='Имя'
-				placeholder='Введите имя'
+				title='Никнейм'
+				placeholder='Введите ник'
 				type='text'
 				invalid={invalidFields.includes('nickname')}
 				value={form.nickname}
@@ -179,6 +186,7 @@ const AuthPage = () => {
 
 	return (
 		<div className='AuthPage'>
+			{redirect ? <Redirect  to='/'/> : null}
 			{page === 0 ? <h2 style={{fontFamily: 'Bahnschrift',
 				fontSize: '450%', marginBottom: '5px'}}
 				>Войдите</h2>
@@ -186,12 +194,10 @@ const AuthPage = () => {
 				fontSize: '450%', marginBottom: '5px'}}
 				>Зарегистрируйтесь</h2>}
 
-			<p style={{color: successCreation
-					? 'green' : 'rgb(255,118,118)'}}
-			> &nbsp; {`${successCreation ?
-				'Пользователь создан' : backendValidationError}`} </p>
+			<p style={{color: 'rgb(255,118,118)'}}
+			> &nbsp; {`${backendValidationError}`} </p>
 
-			{page === 0 ? login : register}
+			{loading ? <p>loader</p> : page === 0 ? login : register}
 
 			<p style={{color: 'gray'}}
 			>Зарегистрируйтесь, чтобы писать комментарии... или да</p>
