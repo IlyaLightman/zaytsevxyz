@@ -6,8 +6,6 @@ const notForRenderPathnames = [
 ]
 
 const Layout = props => {
-	console.log(props.location.pathname)
-
 	const shouldNavbarRender = !notForRenderPathnames.includes(
 		props.location.pathname)
 

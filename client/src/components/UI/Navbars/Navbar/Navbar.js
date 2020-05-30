@@ -5,7 +5,6 @@ import { AuthContext } from '../../../../context/AuthContext'
 
 const Navbar = props => {
 	const { isAuthenticated } = useContext(AuthContext)
-	console.log(useContext(AuthContext))
 
 	return (
 		<div className='Bar'

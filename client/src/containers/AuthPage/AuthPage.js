@@ -56,7 +56,7 @@ const AuthPage = () => {
 			return
 		}
 
-		auth.login(data.token, data.userId)
+		auth.login(data.token, data.userId, data.userData)
 		setRedirect(true)
 	}
 

@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './BlogPage.scss'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
 
 const BlogPage = () => {
+	const auth = useContext(AuthContext)
+	console.log(auth)
+
+	const isAuth = auth.isAuthenticated
 
 	return (
 		<div className='BlogPage'>
@@ -25,6 +30,7 @@ const BlogPage = () => {
 			</div>
 
 			<NavLink to='/create'>Создать пост</NavLink>
+
 		</div>
 	)
 }

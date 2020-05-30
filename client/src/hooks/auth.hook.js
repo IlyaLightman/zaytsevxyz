@@ -7,9 +7,13 @@ const useAuth = () => {
 	const [ready, setReady] = useState(false)
 	const [userId, setUserId] = useState(null)
 
-	const login = useCallback((jwtToken, id) => {
+	const [userData, setUserData] = useState(null)
+
+	const login = useCallback((jwtToken, id, userData) => {
 		setToken(jwtToken)
 		setUserId(id)
+
+		setUserData(userData)
 
 		localStorage.setItem(storageName, JSON.stringify({
 			userId: id, token: jwtToken
@@ -31,7 +35,7 @@ const useAuth = () => {
 		setReady(true)
 	}, [login])
 
-	return { login, logout, token, userId, ready }
+	return { login, logout, token, userId, ready, userData }
 }
 
 export default useAuth

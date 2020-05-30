@@ -15,7 +15,10 @@ const schema = new Schema({
 		required: true,
 		unique: true
 	},
-	isAdmin: Boolean
+	isAdmin: {
+		type: Boolean,
+		default: false
+	}
 })
 
 module.exports = model('User', schema)

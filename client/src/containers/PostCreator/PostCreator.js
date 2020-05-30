@@ -16,7 +16,15 @@ const PostCreator = () => {
 				// onChange
 				// value
 			/>
+
+			<button
+				onClick={() => {
+					fetch('/api/post')
+				}}
+			>проверка</button>
 		</div>
+
+
 	)
 }
 

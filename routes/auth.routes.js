@@ -85,7 +85,12 @@ router.post('/login', loginValidators,
 				{ expiresIn: '1h' }
 			)
 
-			res.json({ token, userId: user.id })
+			const userData = {
+				nickname: user.nickname,
+				isAdmin: user.isAdmin
+			}
+
+			res.json({ token, userId: user.id, userData })
 		} catch (err) {
 			res.status(500).json({ message: 'Something wrong' })
 		}
