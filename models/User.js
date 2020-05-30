@@ -14,7 +14,8 @@ const schema = new Schema({
 		type: String,
 		required: true,
 		unique: true
-	}
+	},
+	isAdmin: Boolean
 })
 
 module.exports = model('User', schema)

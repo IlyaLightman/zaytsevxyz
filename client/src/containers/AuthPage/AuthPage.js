@@ -3,6 +3,7 @@ import './AuthPage.scss'
 import { Redirect } from 'react-router-dom'
 import Button from '../../components/UI/Buttons/Button/Button'
 import Input from '../../components/UI/Inputs/Input/Input'
+import Loader from '../../components/UI/Loaders/Loader/Loader'
 import useHttp from '../../hooks/http.hook'
 import { AuthContext } from '../../context/AuthContext'
 
@@ -197,7 +198,7 @@ const AuthPage = () => {
 			<p style={{color: 'rgb(255,118,118)'}}
 			> &nbsp; {`${backendValidationError}`} </p>
 
-			{loading ? <p>loader</p> : page === 0 ? login : register}
+			{loading ? <Loader /> : page === 0 ? login : register}
 
 			<p style={{color: 'gray'}}
 			>Зарегистрируйтесь, чтобы писать комментарии... или да</p>
