@@ -1,5 +1,6 @@
 import React from 'react'
 import './BlogPage.scss'
+import { NavLink } from 'react-router-dom'
 
 const BlogPage = () => {
 
@@ -22,6 +23,8 @@ const BlogPage = () => {
 			<div>
 
 			</div>
+
+			<NavLink to='/create'>Создать пост</NavLink>
 		</div>
 	)
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Radium from 'radium'
 
-const LargeInput = () => {
+const LargeInput = props => {
 	const {
 		title,
 		placeholder,
@@ -15,7 +15,7 @@ const LargeInput = () => {
 			display: 'flex',
 			flexDirection: 'row',
 			justifyContent: 'flex-end',
-			alignItems: 'center'
+			alignItems: 'top'
 		}}>
 			<p style={{
 				color: invalid ? 'red' : 'black',
@@ -28,8 +28,8 @@ const LargeInput = () => {
 					border: '1px solid gray',
 					borderRadius: '10px',
 					padding: '5px 5px 5px 10px',
-					width: '225px',
-					height: '25px',
+					width: '500px',
+					height: '100px',
 					outline: 'none'
 				}}
 				value={value}
@@ -40,4 +40,4 @@ const LargeInput = () => {
 	)
 }
 
-export default LargeInput
+export default Radium(LargeInput)
