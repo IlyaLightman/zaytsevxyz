@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const Post = require('../models/Post')
+const User = require('../models/User')
 const auth = require('../middleware/auth.middleware')
 
 const router = Router()
@@ -8,8 +9,9 @@ const errorMessage = 'Что-то пошло не так.... попробуйт�
 router.post('/create', auth, async (req,res) => {
 	try {
 		const {
-			title, cover, content, user, date, tags
+			title, cover, content, userId, date, tags
 		} = req.body
+		const user = User.findOne({ _id: userId })
 
 		if (!user.isAdmin) {
 			res.status(500).json({
