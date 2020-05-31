@@ -7,7 +7,7 @@ const BlogPage = () => {
 	const auth = useContext(AuthContext)
 	console.log(auth)
 
-	const isAuth = auth.isAuthenticated
+	const isAdmin = auth.userData.isAdmin
 
 	return (
 		<div className='BlogPage'>
@@ -29,7 +29,8 @@ const BlogPage = () => {
 
 			</div>
 
-			<NavLink to='/create'>Создать пост</NavLink>
+			{isAdmin ?
+				<NavLink to='/create'>Создать пост</NavLink> : null}
 
 		</div>
 	)

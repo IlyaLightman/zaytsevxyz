@@ -39,7 +39,7 @@ router.post('/create', auth, async (req,res) => {
 
 router.get('/', async (req, res) => {
 	try {
-		console.log('req', req)
+		// console.log('req', req)
 		const posts = await Post.find()
 
 		res.json(posts)

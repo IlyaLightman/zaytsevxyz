@@ -9,19 +9,32 @@ const PostCreator = () => {
 	return (
 		<div className='PostCreator'>
 			<p>Ну что вводи параметры</p>
+
+			<Input
+				title='Название'
+				placeholder='Название поста'
+				invalid={false}
+			/>
+
 			<LargeInput
 				title='title'
 				placeholder='placeholder'
-				invalid={true}
+				invalid={false}
 				// onChange
 				// value
 			/>
 
-			<button
-				onClick={() => {
-					fetch('/api/post')
-				}}
-			>проверка</button>
+			<Input
+				title='Обложка'
+				placeholder='Ссылка на картинку'
+				invalid={false}
+			/>
+
+			<Button
+				type='primary'
+				theme='dark'
+				title='Опубликовать'
+			/>
 		</div>
 
 
