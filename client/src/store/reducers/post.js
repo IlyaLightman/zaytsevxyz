@@ -9,7 +9,8 @@ import {
 const initialState = {
 	posts: [],
 	loading: false,
-	error: null
+	error: null,
+	post: null
 }
 
 export default function postReducer(state = initialState, action) {

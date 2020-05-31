@@ -7,7 +7,8 @@ const BlogPage = () => {
 	const auth = useContext(AuthContext)
 	console.log(auth)
 
-	const isAdmin = auth.userData.isAdmin
+	// console.log(auth.getUserData())
+	const isAdmin = auth.getUserData().isAdmin
 
 	return (
 		<div className='BlogPage'>
