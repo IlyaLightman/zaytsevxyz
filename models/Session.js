@@ -11,6 +11,10 @@ const schema = new Schema({
 		required: true,
 		ref: 'User'
 	},
+	userData: {
+		nickname: String,
+		isAdmin: Boolean
+	},
 	expire_at: {
 		type: Date,
 		default: Date.now,

@@ -75,7 +75,8 @@ router.post('/login', loginValidators,
 			if (!isMatch) {
 				return res.status(400).json({
 					errors: [{
-						msg: 'Неверный пароль' }],
+						msg: 'Неверный пароль'
+					}],
 					message: 'Неверный пароль'
 				})
 			}
@@ -91,12 +92,28 @@ router.post('/login', loginValidators,
 				isAdmin: user.isAdmin
 			}
 
-			const session = new Session({ token, userId: user.id })
+			const session = new Session({ token, userId: user.id, userData })
 			session.save()
 
-			res.json({ token, userId: user.id, userData })
+			// res.json({ token, userId: user.id, userData })
+			res.json({ sessionId: session._id })
 		} catch (err) {
 			res.status(500).json({ message: 'Something wrong' })
+		}
+	}
+)
+
+router.post('/session',
+	async (req, res) => {
+		try {
+			const sessionId = req.body.sessionId
+			console.log(sessionId)
+
+			const session = await Session.findOne({ _id: sessionId })
+
+			res.json({ id: session.userId, userData: session.userData })
+		} catch (err) {
+			res.status(500).json({ message: 'Session failed' })
 		}
 	}
 )
