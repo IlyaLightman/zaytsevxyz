@@ -8,7 +8,8 @@ const BlogPage = () => {
 	console.log(auth)
 
 	// console.log(auth.getUserData())
-	const isAdmin = auth.getUserData().isAdmin
+	const isAdmin = auth.getUserData() ?
+		auth.getUserData().isAdmin : false
 
 	return (
 		<div className='BlogPage'>
