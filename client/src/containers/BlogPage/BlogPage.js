@@ -5,7 +5,6 @@ import { AuthContext } from '../../context/AuthContext'
 
 const BlogPage = () => {
 	const auth = useContext(AuthContext)
-	console.log(auth)
 
 	// console.log(auth.getUserData())
 	const isAdmin = auth.getUserData() ?

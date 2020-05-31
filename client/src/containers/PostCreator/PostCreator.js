@@ -5,10 +5,11 @@ import Button from '../../components/UI/Buttons/Button/Button'
 import Input from '../../components/UI/Inputs/Input/Input'
 import LargeInput from '../../components/UI/Inputs/LargeInput/LargeInput'
 import { createPost } from '../../store/actions/post'
+import Loader from '../../components/UI/Loaders/Loader/Loader'
 
 const PostCreator = props => {
 	const [form, setForm] = useState({
-		title: '', text: '', cover: ''
+		title: '', cover: '', content: ''
 	})
 
 	const changeHandler = (field, value) => {
@@ -16,54 +17,54 @@ const PostCreator = props => {
 	}
 
 	const createHandler = () => {
-		props.createPost()
+		props.createPost(...form)
 	}
 
-	return (
-		<div className='PostCreator'>
-			<p>Ну что вводи параметры</p>
+	return (props.loading ? <Loader /> :
 
-			<LargeInput
-				title='Текст'
-				placeholder='placeholder'
-				invalid={false}
-				onChange={event =>
-					changeHandler('text', event.target.value)}
-				value={form.text}
-			/>
+			<div className='PostCreator'>
+				<p>Ну что вводи параметры</p>
 
-			<Input
-				title='Название'
-				placeholder='Название поста'
-				invalid={false}
-				value={form.title}
-				onChange={event =>
-					changeHandler('title', event.target.value)}
-			/>
+				<LargeInput
+					title='Текст'
+					placeholder='Контент'
+					invalid={false}
+					onChange={event =>
+						changeHandler('content', event.target.value)}
+					value={form.content}
+				/>
 
-			<Input
-				title='Обложка'
-				placeholder='Ссылка на картинку'
-				invalid={false}
-				value={form.cover}
-				onChange={event =>
-					changeHandler('cover', event.target.value)}
-			/>
+				<Input
+					title='Название'
+					placeholder='Название поста'
+					invalid={false}
+					value={form.title}
+					onChange={event =>
+						changeHandler('title', event.target.value)}
+				/>
 
-			<Button
-				type='primary'
-				theme='dark'
-				title='Опубликовать'
-			/>
-		</div>
+				<Input
+					title='Обложка'
+					placeholder='Ссылка на картинку'
+					invalid={false}
+					value={form.cover}
+					onChange={event =>
+						changeHandler('cover', event.target.value)}
+				/>
 
-
+				<Button
+					type='primary'
+					theme='dark'
+					title='Опубликовать'
+					onClick={createHandler}
+				/>
+			</div>
 	)
 }
 
-function mapStateToProps() {
+function mapStateToProps(state) {
 	return {
-
+		loading: state.post.loading
 	}
 }
 
@@ -74,4 +75,4 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(PostCreator)
+export default connect(mapStateToProps, mapDispatchToProps)(PostCreator)

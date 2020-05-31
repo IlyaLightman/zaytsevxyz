@@ -3,6 +3,7 @@ const { hash, compare } = require('bcryptjs')
 const config = require('config')
 const jwt = require('jsonwebtoken')
 const User = require('../models/User')
+const Session = require('../models/Session')
 const { validationResult } = require('express-validator')
 const { registerValidators, loginValidators } = require('../utils/validators')
 
@@ -89,6 +90,9 @@ router.post('/login', loginValidators,
 				nickname: user.nickname,
 				isAdmin: user.isAdmin
 			}
+
+			const session = new Session({ token, userId: user.id })
+			session.save()
 
 			res.json({ token, userId: user.id, userData })
 		} catch (err) {
