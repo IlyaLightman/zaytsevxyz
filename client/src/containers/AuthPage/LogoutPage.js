@@ -38,8 +38,8 @@ const LogoutPage = () => {
 						type='primary'
 						theme='dark'
 						title='Выйти'
-						onClick={() => {
-							logout()
+						onClick={async () => {
+							await logout()
 							setRedirect(true)
 						}}
 					/>

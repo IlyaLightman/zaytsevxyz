@@ -88,14 +88,16 @@ router.post('/login', loginValidators,
 			)
 
 			const userData = {
-				nickname: user.nickname,
-				isAdmin: user.isAdmin
+				isAdmin: user.isAdmin,
+				nickname: user.nickname
 			}
 
-			const session = new Session({ token, userId: user.id, userData })
+			const session = new Session({
+				token, userId: user.id, userData
+			})
 			session.save()
 
-			// res.json({ token, userId: user.id, userData })
+			// res.json({ token, userId: user.id })
 			res.json({ sessionId: session._id })
 		} catch (err) {
 			res.status(500).json({ message: 'Something wrong' })
@@ -107,13 +109,29 @@ router.post('/session',
 	async (req, res) => {
 		try {
 			const sessionId = req.body.sessionId
-			console.log(sessionId)
 
 			const session = await Session.findOne({ _id: sessionId })
 
-			res.json({ id: session.userId, userData: session.userData })
+			res.json({
+				token: session.token,
+				id: session.userId,
+				userData: session.userData
+			})
 		} catch (err) {
 			res.status(500).json({ message: 'Session failed' })
+		}
+	}
+)
+
+router.post('/kill',
+	async (req, res) => {
+		try {
+			const sessionId = req.body.sessionId
+			await Session.findOneAndDelete({ _id: sessionId })
+
+			res.json({ message: 'Сессия удалена' })
+		} catch (err) {
+			res.status(500).json('Failed')
 		}
 	}
 )

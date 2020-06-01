@@ -7,16 +7,19 @@ module.exports = (req, res, next) => {
 	}
 
 	try {
+		console.log('tototoken')
+		console.log(req.headers)
 		const token = req.headers.authorization.split(' ')[1] // "Bearer TOKEN"
+		console.log('token', token)
 
 		if (!token) {
-			res.status(401).json({ message: 'Не авторизирован' })
+			res.status(401).json({ message: 'Не авторизирован... совсем' })
 		}
 
 		const decoded = jwt.verify(token, config.get('jwtSecret'))
 		req.user = decoded
 		next()
 	} catch (err) {
-		res.status(401).json({ message: 'Не авторизирован' })
+		res.status(401).json({ message: 'Не авторизирован', err })
 	}
 }
