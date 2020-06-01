@@ -48,18 +48,6 @@ const AuthPage = () => {
 		await loginHandler()
 	}
 
-	// const loginHandler = async () => {
-	// 	const data = await request(
-	// 		'/api/auth/login', 'POST', { ...form })
-	// 	if (data.errors) {
-	// 		setBackendValidationError(data.errors[0].msg)
-	// 		return
-	// 	}
-	//
-	// 	auth.login(data.token, data.userId, data.userData)
-	// 	setRedirect(true)
-	// }
-
 	const loginHandler = async () => {
 		const data = await request(
 			'/api/auth/login', 'POST', { ...form })
@@ -68,9 +56,22 @@ const AuthPage = () => {
 			return
 		}
 
-		auth.login(data.sessionId)
+		// auth.login(data.token, data.userId)
+		await auth.login(data.sessionId)
 		setRedirect(true)
 	}
+
+	// const loginHandler = async () => {
+	// 	const data = await request(
+	// 		'/api/auth/login', 'POST', { ...form })
+	// 	if (data.errors) {
+	// 		setBackendValidationError(data.errors[0].msg)
+	// 		return
+	// 	}
+	//
+	// 	auth.login(data.sessionId)
+	// 	setRedirect(true)
+	// }
 
 	const formValidator = () => {
 		const invalidFields = []

@@ -81,24 +81,32 @@ router.post('/login', loginValidators,
 				})
 			}
 
-			const token = jwt.sign(
-				{ userId: user.id },
-				config.get('jwtSecret'),
-				{ expiresIn: '1h' }
-			)
+			const currentSession = await Session.findOne({ userId: user.id })
+			if (currentSession) {
+				currentSession.expire_at += 3600
+				await currentSession.save()
 
-			const userData = {
-				isAdmin: user.isAdmin,
-				nickname: user.nickname
+				res.json({ sessionId: currentSession._id })
+			} else {
+				const token = jwt.sign(
+					{ userId: user.id },
+					config.get('jwtSecret'),
+					{ expiresIn: '1h' }
+				)
+
+				const userData = {
+					isAdmin: user.isAdmin,
+					nickname: user.nickname
+				}
+
+				const session = new Session({
+					token, userId: user.id, userData
+				})
+				session.save()
+
+				// res.json({ token, userId: user.id })
+				res.json({ sessionId: session._id })
 			}
-
-			const session = new Session({
-				token, userId: user.id, userData
-			})
-			session.save()
-
-			// res.json({ token, userId: user.id })
-			res.json({ sessionId: session._id })
 		} catch (err) {
 			res.status(500).json({ message: 'Something wrong' })
 		}
