@@ -7,10 +7,7 @@ module.exports = (req, res, next) => {
 	}
 
 	try {
-		console.log('tototoken')
-		console.log(req.headers)
-		const token = req.headers.authorization.split(' ')[1] // "Bearer TOKEN"
-		console.log('token', token)
+		const token = req.headers.authorization.split(' ')[1] // "Bearer TOKEN
 
 		if (!token) {
 			res.status(401).json({ message: 'Не авторизирован... совсем' })

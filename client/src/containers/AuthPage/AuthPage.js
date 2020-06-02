@@ -18,7 +18,6 @@ const AuthPage = () => {
 	)
 	const [backendValidationError, setBackendValidationError] =
 		useState('')
-	// const [successCreation, setSuccess] = useState(false)
 	const [redirect, setRedirect] = useState(false)
 
 	const { loading, request, /*error,*/ clearError } = useHttp()
@@ -43,7 +42,6 @@ const AuthPage = () => {
 			setBackendValidationError(data.errors[0].msg)
 			return
 		}
-		// setSuccess(true)
 
 		await loginHandler()
 	}
@@ -60,18 +58,6 @@ const AuthPage = () => {
 		await auth.login(data.sessionId)
 		setRedirect(true)
 	}
-
-	// const loginHandler = async () => {
-	// 	const data = await request(
-	// 		'/api/auth/login', 'POST', { ...form })
-	// 	if (data.errors) {
-	// 		setBackendValidationError(data.errors[0].msg)
-	// 		return
-	// 	}
-	//
-	// 	auth.login(data.sessionId)
-	// 	setRedirect(true)
-	// }
 
 	const formValidator = () => {
 		const invalidFields = []

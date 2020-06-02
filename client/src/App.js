@@ -11,12 +11,12 @@ import BlogPage from './containers/BlogPage/BlogPage'
 import PostCreator from './containers/PostCreator/PostCreator'
 
 function App() {
-	const { token, login, logout, userId/*, ready */, getUserData } = useAuth()
-	const isAuthenticated = !!userId
+	const { token, login, logout, userId/*, ready */, userData } = useAuth()
+	const isAuthenticated = !!token
 
 	return (
 		<AuthContext.Provider value={{
-			token, login, logout, userId, isAuthenticated, getUserData
+			token, login, logout, userId, isAuthenticated, userData
 		}}>
 			<Switch>
 				<Layout>
