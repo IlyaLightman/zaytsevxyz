@@ -6,18 +6,26 @@ import Input from '../../components/UI/Inputs/Input/Input'
 import LargeInput from '../../components/UI/Inputs/LargeInput/LargeInput'
 import { createPost } from '../../store/actions/post'
 import Loader from '../../components/UI/Loaders/Loader/Loader'
+import useAuth from '../../hooks/auth.hook'
 
 const PostCreator = props => {
 	const [form, setForm] = useState({
 		title: '', cover: '', content: ''
 	})
 
+	const { userId, userData, token } = useAuth()
+
 	const changeHandler = (field, value) => {
 		setForm({ ...form, [field]: value })
 	}
 
 	const createHandler = () => {
-		props.createPost(...form)
+		const author = {
+			name: userData.username, userId
+		}
+		const post = { ...form, author }
+
+		props.createPost(post, token)
 	}
 
 	return (props.loading ? <Loader /> :
@@ -70,8 +78,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		createPost: (title, cover, content) =>
-			dispatch(createPost(title, cover, content))
+		createPost: (title, cover, content, author) =>
+			dispatch(createPost(title, cover, content, author))
 	}
 }
 

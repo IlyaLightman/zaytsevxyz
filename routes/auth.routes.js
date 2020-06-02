@@ -126,8 +126,6 @@ router.post('/session',
 				userData: session.userData
 			})
 		} catch (err) {
-			// res.status(500).json({ message: 'Session failed' })
-
 			res.json({
 				token: null,
 				id: null,

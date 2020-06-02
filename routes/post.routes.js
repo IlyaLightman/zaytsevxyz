@@ -9,23 +9,21 @@ const errorMessage = 'Что-то пошло не так.... попробуйт�
 router.post('/create', auth, async (req,res) => {
 	try {
 		const {
-			title, cover, content, userId, date, tags
+			title, cover, content, author, date, tags
 		} = req.body
-		const user = User.findOne({ _id: userId })
+
+		const user = await User.findOne({ _id: author.userId })
 
 		if (!user.isAdmin) {
 			res.status(500).json({
 				message: 'У вас нет прав'
 			})
 		}
+		author.name = user.nickname
 
-		const author = {
-			name: user.nickname,
-			userId: user._id
-		}
-		const post = new Post(
+		const post = new Post({
 			title, cover, content, author, date, tags
-		)
+		})
 
 		await post.save()
 
@@ -34,7 +32,7 @@ router.post('/create', auth, async (req,res) => {
 		})
 	} catch (err) {
 		res.status(500).json({
-			message: errorMessage
+			message: errorMessage, err
 		})
 	}
 })

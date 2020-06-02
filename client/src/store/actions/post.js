@@ -3,8 +3,8 @@ import {
 	CREATE_POST_START, CREATE_POST_SUCCESS,
 	FETCH_POSTS_ERROR,
 	FETCH_POSTS_START, FETCH_POSTS_SUCCESS
-
 } from './actionTypes'
+import request from '../../utils/request'
 
 export function fetchPosts() {
 	return async dispatch => {
@@ -25,19 +25,21 @@ export function fetchPosts() {
 	}
 }
 
-export function createPost(post, userId) {
+export function createPost(post, token) {
 	return async dispatch => {
 		dispatch(createPostStart())
 
 		post = {
-			...post, userId, date: Date.now(), tags: []
+			...post, date: Date.now(), tags: []
 		}
 
+		console.log(post)
+
 		try {
-			await fetch('/api/post/create', {
-				method: 'POST',
-				body: JSON.stringify(post)
-			})
+			await request(
+				'/api/post/create', 'POST', post, {
+					Authorization: `Bearer ${token}`
+				})
 
 			dispatch(createPostSuccess(post))
 		} catch (err) {

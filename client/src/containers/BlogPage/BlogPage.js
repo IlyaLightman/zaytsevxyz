@@ -9,10 +9,8 @@ const BlogPage = () => {
 	const auth = useContext(AuthContext)
 	const { request } = useHttp()
 
-	// console.log(auth.userData())
-	const isAdmin = auth.userData() ?
-		auth.userData().isAdmin : false
-
+	const isAdmin = auth.userData ?
+		auth.userData.isAdmin : false
 	return (
 		<div className='BlogPage'>
 			<h3>Блог</h3>
@@ -43,7 +41,7 @@ const BlogPage = () => {
 					title='Проверка авторизации'
 					onClick={async () => {
 						await request('/api/test/data', 'POST', {}, {
-							Authorization: `Bearer ${await auth.token}`
+							Authorization: `Bearer ${auth.token}`
 						})
 					}}
 				/>
