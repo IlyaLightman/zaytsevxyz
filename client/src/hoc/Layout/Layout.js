@@ -14,7 +14,8 @@ const Layout = props => {
 			{
 				shouldNavbarRender ?
 					<Navbar
-						isAuthenticated={props.isAuthenticated} />
+						isAuthenticated={props.isAuthenticated}
+						currRoute={props.location.pathname}/>
 					: null
 			}
 

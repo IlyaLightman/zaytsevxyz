@@ -5,6 +5,7 @@ import { AuthContext } from '../../../../context/AuthContext'
 
 const Navbar = props => {
 	const { isAuthenticated } = useContext(AuthContext)
+	const currRoute = props.currRoute
 
 	return (
 		<div className='Bar'

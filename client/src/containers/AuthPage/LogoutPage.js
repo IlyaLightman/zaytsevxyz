@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Button from '../../components/UI/Buttons/Button/Button'
-import Redirect from 'react-router-dom/es/Redirect'
+import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 
 const LogoutPage = () => {
