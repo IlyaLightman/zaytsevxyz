@@ -28,8 +28,8 @@ const LargeInput = props => {
 					border: '1px solid gray',
 					borderRadius: '10px',
 					padding: '5px 5px 5px 10px',
-					width: '500px',
-					height: '100px',
+					width: '850px',
+					height: '250px',
 					outline: 'none'
 				}}
 				value={value}
