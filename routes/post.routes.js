@@ -9,7 +9,7 @@ const errorMessage = 'Что-то пошло не так.... попробуйт�
 router.post('/create', auth, async (req,res) => {
 	try {
 		const {
-			title, cover, content, author, date, tags
+			title, cover, content, author, date, tags, preview
 		} = req.body
 
 		const user = await User.findOne({ _id: author.userId })
@@ -22,7 +22,7 @@ router.post('/create', auth, async (req,res) => {
 		author.name = user.nickname
 
 		const post = new Post({
-			title, cover, content, author, date, tags
+			title, cover, content, author, date, tags, preview
 		})
 
 		await post.save()

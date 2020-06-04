@@ -1,0 +1,25 @@
+.PostBlock {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 0px solid darkblue;
+  border-radius: 10px;
+  background: #e7edf6;
+  transition: 0.33s;
+
+  h3 {
+    margin: 0px 0 10px 15px;
+    font-size: 45px;
+    color: black;
+  }
+
+  p {
+    margin: 0 0 0 15px;
+  }
+
+  &:hover {
+    background: #cbd9ef;
+  }
+}

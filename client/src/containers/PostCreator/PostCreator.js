@@ -11,13 +11,20 @@ import ReactMarkdown from 'react-markdown'
 
 const PostCreator = props => {
 	const [form, setForm] = useState({
-		title: '', cover: '', content: ''
+		title: '', cover: '', content: '', preview: ''
 	})
+	const [invalidPreview, setInvalidPreview] = useState(false)
 
 	const { userId, userData, token } = useAuth()
 
 	const changeHandler = (field, value) => {
 		setForm({ ...form, [field]: value })
+
+		if (form.preview.length > 45) {
+			setInvalidPreview(true)
+		} else {
+			setInvalidPreview(false)
+		}
 	}
 
 	const createHandler = () => {
@@ -37,7 +44,7 @@ const PostCreator = props => {
 					width: '850px',
 					display: 'flex',
 					justifyContent: 'space-around',
-					marginBottom: '25px'
+					marginBottom: '10px'
 				}}>
 					<Input
 						title='Название'
@@ -55,6 +62,20 @@ const PostCreator = props => {
 						value={form.cover}
 						onChange={event =>
 							changeHandler('cover', event.target.value)}
+					/>
+				</div>
+
+				<div style={{
+					width: '500px',
+					marginBottom: '25px'
+				}}>
+					<Input
+						title='Превью для главной'
+						placeholder='Максимум 45 символов'
+						invalid={invalidPreview}
+						value={form.preview}
+						onChange={event =>
+							changeHandler('preview', event.target.value)}
 					/>
 				</div>
 
@@ -90,6 +111,7 @@ const PostCreator = props => {
 					border: '1px solid gray',
 					borderRadius: '10px',
 					padding: '5px 5px 5px 10px',
+					marginBottom: '100px'
 				}}>
 					<ReactMarkdown
 						source={form.content}
