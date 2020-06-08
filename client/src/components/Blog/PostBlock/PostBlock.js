@@ -1,28 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './PostBlock.scss'
-import Button from '../../UI/Buttons/Button/Button'
+import { Redirect } from 'react-router-dom'
 
 const PostBlock = props => {
 	const {
-		cover, preview, title, date, tags
+		cover, preview, title, date, tags, id
 	} = props
+	const [redirect, setRedirect] = useState(false)
+
+	const clickHandler = () => {
+		setRedirect(true)
+	}
 
 	return (
-		<div className='PostBlock'>
-			<img
-				style={{border: '0.1 solid black', borderRadius: '9px 9px 0 0'}}
-				src={cover} alt='title'
-				height='200px' width='400px'
-			/>
+		redirect ? <Redirect to={`/blog/${id}`}/> :
+			<div className='PostBlock'
+			onClick={clickHandler}>
+				<img
+					style={{ border: '0.1 solid black', borderRadius: '9px 9px 0 0' }}
+					src={cover} alt='title'
+					height='200px' width='400px'
+				/>
 
-			<h3>{title}</h3>
+				<h3>{title}</h3>
 
-			<p className='Preview'
-			>{preview}</p>
+				<p className='Preview'
+				>{preview}</p>
 
-			<p className='Date'
-			>{date}</p>
-		</div>
+				<p className='Date'
+				>{date}</p>
+			</div>
 	)
 }
 
