@@ -22,7 +22,8 @@
       transition: 0.25s;
 
       &:hover {
-        transform: translateY(-2.5px);
+        transform: scale(1.1) translateY(-1.5px);
+        // transform: translateY(-2.5px);
         text-decoration: underline;
       }
     }
@@ -75,7 +76,8 @@
       transition: 0.25s;
 
       &:hover {
-        transform: translateY(-2.5px);
+        transform: scale(1.1) translateY(-1.5px);
+        // transform: translateY(-2.5px);
         text-decoration: underline;
       }
     }

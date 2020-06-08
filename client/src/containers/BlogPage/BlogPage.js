@@ -1,14 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './BlogPage.scss'
+import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import Button from '../../components/UI/Buttons/Button/Button'
 import useHttp from '../../hooks/http.hook'
 import PostBlock from '../../components/Blog/PostBlock/PostBlock'
+import { fetchPosts } from '../../store/actions/post'
+import Loader from '../../components/UI/Loaders/Loader/Loader'
 
-const BlogPage = () => {
+const BlogPage = props => {
 	const auth = useContext(AuthContext)
 	const { request } = useHttp()
+
+	useEffect(() => {
+		props.fetchPosts()
+	}, [])
 
 	const isAdmin = auth.userData ?
 		auth.userData.isAdmin : false
@@ -36,10 +43,15 @@ const BlogPage = () => {
 				<NavLink to='/create'>Создать пост</NavLink> : null
 			}
 
+			<div className='Posts'>
+
+			</div>
+
 			<PostBlock
-				cover='https://lh3.googleusercontent.com/proxy/F82ScaJieGSruD1CSPIachbDqywAfTfAnJ8q8Gtb_b7JC5mfQXhjcM5apQDMv7XzBoDpLaFaEfzb1InaYvvFQuU_KuwupiloGgs7TKWi6k9v9Q'
+				cover='https://avatars.mds.yandex.net/get-pdb/1774156/c29007c1-a75a-4f7a-b761-4c271d896d54/s1200?webp=false'
 				preview='Что как дела как где что'
 				title='Добрый вечер'
+				date='30.05.20'
 			/>
 
 			<div>
@@ -55,8 +67,26 @@ const BlogPage = () => {
 					}}
 				/>
 			</div>
+
+			{props.loading ? <Loader /> : <div>
+
+			</div>}
 		</div>
 	)
 }
 
-export default BlogPage
+function mapStateToProps(state) {
+	return {
+		posts: state.post.posts,
+		loading: state.post.loading
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		fetchPosts: () =>
+			dispatch(fetchPosts())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BlogPage)

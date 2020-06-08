@@ -14,6 +14,10 @@ const schema = new Schema({
 		type: String,
 		required: true
 	},
+	preview: {
+		type: String,
+		required: true
+	},
 	author: {
 		name: String,
 		userId: {

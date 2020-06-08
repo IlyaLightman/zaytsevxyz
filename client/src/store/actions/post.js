@@ -11,9 +11,7 @@ export function fetchPosts() {
 		dispatch(fetchPostsStart())
 
 		try {
-			const data = await fetch('/api/post', {
-				method: 'GET'
-			})
+			const data = await request('/api/post', 'GET')
 
 			console.log(data)
 			// какое-то преобразование

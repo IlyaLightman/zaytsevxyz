@@ -4,7 +4,7 @@ import Button from '../../UI/Buttons/Button/Button'
 
 const PostBlock = props => {
 	const {
-		cover, preview, title, tags
+		cover, preview, title, date, tags
 	} = props
 
 	return (
@@ -17,7 +17,11 @@ const PostBlock = props => {
 
 			<h3>{title}</h3>
 
-			<p>{preview}</p>
+			<p className='Preview'
+			>{preview}</p>
+
+			<p className='Date'
+			>{date}</p>
 		</div>
 	)
 }
