@@ -1,15 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './PostPage.scss'
 import { connect } from 'react-redux'
 import { fetchPostById } from '../../store/actions/post'
+import ReactMarkdown from 'react-markdown'
+import Loader from '../../components/UI/Loaders/Loader/Loader'
 
 const PostPage = props => {
 	const postId = props.match.params.id
+	const post = props.post
+
+	useEffect(() => {
+		props.fetchPostById(postId)
+	}, [])
 
 	return (
-		<div>
+		props.loading ? <Loader /> : (
+			<div className='PostPage'>
+				<h2>{post.title}</h2>
 
-		</div>
+				<ReactMarkdown
+					source={post.content}
+				/>
+
+				<p>{post.author.name}</p>
+				<p>{post.date}</p>
+			</div>
+		)
 	)
 }
 
