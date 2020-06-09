@@ -19,6 +19,19 @@ const BlogPage = props => {
 
 	const isAdmin = auth.userData ?
 		auth.userData.isAdmin : false
+
+	const fetchedPosts = posts => {
+		return posts.map((post, index) => {
+			return <PostBlock
+				key={'p' + index}
+				cover={post.cover}
+				preview={post.preview}
+				title={post.title}
+				date='30.04.20'
+			/>
+		})
+	}
+
 	return (
 		<div className='BlogPage'>
 			<h3>Блог</h3>
@@ -43,10 +56,6 @@ const BlogPage = props => {
 				<NavLink to='/create'>Создать пост</NavLink> : null
 			}
 
-			<div className='Posts'>
-
-			</div>
-
 			<PostBlock
 				cover='https://avatars.mds.yandex.net/get-pdb/1774156/c29007c1-a75a-4f7a-b761-4c271d896d54/s1200?webp=false'
 				preview='Что как дела как где что'
@@ -68,8 +77,8 @@ const BlogPage = props => {
 				/>
 			</div>
 
-			{props.loading ? <Loader /> : <div>
-
+			{props.loading ? <Loader /> : <div className='Posts'>
+				{fetchedPosts(props.posts)}
 			</div>}
 		</div>
 	)

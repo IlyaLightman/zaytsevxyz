@@ -13,7 +13,7 @@ export function fetchPosts() {
 		try {
 			const data = await request('/api/post', 'GET')
 
-			console.log(data)
+			// console.log(data)
 			// какое-то преобразование
 
 			dispatch(fetchPostsSuccess(data))

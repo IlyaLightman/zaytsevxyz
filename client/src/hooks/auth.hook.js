@@ -3,27 +3,6 @@ import request from '../utils/request'
 
 const storageName = 'userData'
 
-// const request = async (url, method, body = null, headers = {}) => {
-// 	try {
-// 		if (body) {
-// 			body = JSON.stringify(body)
-// 			headers['Content-Type'] = 'application/json'
-// 		}
-// 		const response = await fetch(url, {
-// 			method, body, headers
-// 		})
-// 		const data = await response.json()
-//
-// 		if (!response.ok) {
-// 			console.log('oh shit', data)
-// 		}
-//
-// 		return data
-// 	} catch (err) {
-// 		console.log(err)
-// 	}
-// }
-
 export const useAuth = () => {
 	const [token, setToken] = useState(null)
 	const [sessionId, setSessionId] = useState(null)
@@ -72,7 +51,11 @@ export const useAuth = () => {
 				'POST', { sessionId })
 		} catch (err) {
 			console.log(err)
-			return null
+			return {
+				token: null,
+				id: null,
+				userData: null
+			}
 		}
 	}
 
