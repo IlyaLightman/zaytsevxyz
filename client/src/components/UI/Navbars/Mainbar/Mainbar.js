@@ -13,7 +13,8 @@ const Mainbar = props => {
 	return (
 		<div className='Bar'
 			style={{
-				position: 'absolute'
+				position: 'absolute',
+				width: '100vw'
 			}}
 		>
 			<div className='LeftButtons'>

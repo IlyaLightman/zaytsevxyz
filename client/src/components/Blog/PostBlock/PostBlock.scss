@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 0px solid darkblue;
+  border: 0 solid darkblue;
   border-radius: 10px;
   background: #e7edf6;
   transition: 0.33s;
@@ -12,7 +12,7 @@
   margin: 20px;
 
   h3 {
-    margin: 0px 0 10px 15px;
+    margin: 0 0 10px 15px;
     font-size: 45px;
     color: #292b2d;
   }
