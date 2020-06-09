@@ -23,6 +23,7 @@ function App() {
 					<Route path='/auth' component={AuthPage} />
 					<Route path='/logout' component={LogoutPage} />
 					<Route path='/blog' component={BlogPage} />
+					<Route path='/blog/:id' component={BlogPage} />
 					<Route path='/create' component={PostCreator} />
 					<Route exact path='/' component={MainPage} />
 					<Redirect to='/' />

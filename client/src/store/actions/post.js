@@ -1,6 +1,6 @@
 import {
 	CREATE_POST_ERROR,
-	CREATE_POST_START, CREATE_POST_SUCCESS,
+	CREATE_POST_START, CREATE_POST_SUCCESS, FETCH_POST_ERROR, FETCH_POST_START, FETCH_POST_SUCCESS,
 	FETCH_POSTS_ERROR,
 	FETCH_POSTS_START, FETCH_POSTS_SUCCESS
 } from './actionTypes'
@@ -16,6 +16,21 @@ export function fetchPosts() {
 			dispatch(fetchPostsSuccess(data))
 		} catch (err) {
 			dispatch(fetchPostsError(err))
+		}
+	}
+}
+
+export function fetchPostById(id) {
+	return async dispatch => {
+		dispatch(fetchPostStart())
+
+		try {
+			const post = await request(`/api/post/${id}`,
+				'GET')
+
+			dispatch(fetchPostSuccess(post))
+		} catch (err) {
+			dispatch(fetchPostError(err))
 		}
 	}
 }
@@ -43,25 +58,6 @@ export function createPost(post, token) {
 	}
 }
 
-export function createPostStart() {
-	return {
-		type: CREATE_POST_START
-	}
-}
-
-export function createPostSuccess(post) {
-	return {
-		type: CREATE_POST_SUCCESS,
-		post
-	}
-}
-
-export function createPostError() {
-	return {
-		type: CREATE_POST_ERROR
-	}
-}
-
 export function fetchPostsStart() {
 	return {
 		type: FETCH_POSTS_START
@@ -79,5 +75,44 @@ export function fetchPostsError(err) {
 	return {
 		type: FETCH_POSTS_ERROR,
 		error: err
+	}
+}
+
+export function fetchPostStart() {
+	return {
+		type: FETCH_POST_START
+	}
+}
+
+export function fetchPostSuccess(post) {
+	return {
+		type: FETCH_POST_SUCCESS,
+		post
+	}
+}
+
+export function fetchPostError(err) {
+	return {
+		type: FETCH_POST_ERROR,
+		error: err
+	}
+}
+
+export function createPostStart() {
+	return {
+		type: CREATE_POST_START
+	}
+}
+
+export function createPostSuccess(post) {
+	return {
+		type: CREATE_POST_SUCCESS,
+		post
+	}
+}
+
+export function createPostError() {
+	return {
+		type: CREATE_POST_ERROR
 	}
 }

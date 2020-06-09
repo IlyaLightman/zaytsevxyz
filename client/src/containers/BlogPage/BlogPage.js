@@ -23,7 +23,7 @@ const BlogPage = props => {
 	const fetchedPosts = posts => {
 		return posts.map((post, index) => {
 			return <PostBlock
-				key={'p' + index}
+				key={index}
 				cover={post.cover}
 				preview={post.preview}
 				title={post.title}
