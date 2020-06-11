@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './BlogPage.scss'
 import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
@@ -23,10 +23,11 @@ const BlogPage = props => {
 	const fetchedPosts = posts => {
 		return posts.map((post, index) => {
 			return <PostBlock
-				key={index}
+				key={'p' + index}
 				cover={post.cover}
 				preview={post.preview}
 				title={post.title}
+				id={post._id}
 				date='30.04.20'
 			/>
 		})

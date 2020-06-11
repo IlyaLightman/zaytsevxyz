@@ -13,7 +13,7 @@ const PostBlock = props => {
 	}
 
 	return (
-		redirect ? <Redirect to={`/blog/${id}`}/> :
+		redirect ? <Redirect to={`/post/${id}`}/> :
 			<div className='PostBlock'
 			onClick={clickHandler}>
 				<img

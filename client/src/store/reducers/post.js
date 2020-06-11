@@ -1,9 +1,13 @@
 import {
 	CREATE_POST_ERROR,
-	CREATE_POST_START, CREATE_POST_SUCCESS,
+	CREATE_POST_START,
+	CREATE_POST_SUCCESS,
+	FETCH_POST_ERROR,
+	FETCH_POST_START,
+	FETCH_POST_SUCCESS,
 	FETCH_POSTS_ERROR,
-	FETCH_POSTS_START, FETCH_POSTS_SUCCESS
-
+	FETCH_POSTS_START,
+	FETCH_POSTS_SUCCESS
 } from '../actions/actionTypes'
 
 const initialState = {
@@ -24,6 +28,18 @@ export default function postReducer(state = initialState, action) {
 				...state, loading: false, posts: action.posts
 			}
 		case FETCH_POSTS_ERROR:
+			return {
+				...state, loading: false, error: action.error
+			}
+		case FETCH_POST_START:
+			return {
+				...state, loading: true
+			}
+		case FETCH_POST_SUCCESS:
+			return {
+				...state, loading: false, post: action.post
+			}
+		case FETCH_POST_ERROR:
 			return {
 				...state, loading: false, error: action.error
 			}

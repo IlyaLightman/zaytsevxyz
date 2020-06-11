@@ -6,25 +6,32 @@ import ReactMarkdown from 'react-markdown'
 import Loader from '../../components/UI/Loaders/Loader/Loader'
 
 const PostPage = props => {
-	const postId = props.match.params.id
-	const post = props.post
-
 	useEffect(() => {
-		props.fetchPostById(postId)
+		console.log('useEffect')
+		props.fetchPostById(props.match.params.id)
 	}, [])
+
+	const pageContent = post => (
+		<div className='PostPage'>
+			{console.log('render')}
+			{/*<h2>{post.title}</h2>*/}
+
+			{/*<ReactMarkdown*/}
+			{/*	source={post.content}*/}
+			{/*/>*/}
+
+			{/*<p>{post.author.name}</p>*/}
+			{/*<p>{post.date}</p>*/}
+
+			<p>post</p>
+		</div>
+	)
+
+	console.log(props, props.post)
 
 	return (
 		props.loading ? <Loader /> : (
-			<div className='PostPage'>
-				<h2>{post.title}</h2>
-
-				<ReactMarkdown
-					source={post.content}
-				/>
-
-				<p>{post.author.name}</p>
-				<p>{post.date}</p>
-			</div>
+			pageContent(props.post)
 		)
 	)
 }
@@ -38,8 +45,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		fetchPostById: () =>
-			dispatch(fetchPostById())
+		fetchPostById: id =>
+			dispatch(fetchPostById(id))
 	}
 }
 
