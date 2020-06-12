@@ -9,9 +9,11 @@ const errorMessage = 'Что-то пошло не так.... попробуйт�
 router.post('/create', auth, async (req,res) => {
 	try {
 		const {
-			title, cover, content, author, date, tags, preview, user
+			title, cover, content, author, date, tags, preview
 		} = req.body
+		const { user } = req
 
+		console.log(user)
 		const aUser = await User.findOne({ _id: user.userId })
 
 		if (!aUser.isAdmin) {
