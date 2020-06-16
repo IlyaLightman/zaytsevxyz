@@ -13,7 +13,6 @@ router.post('/create', auth, async (req,res) => {
 		} = req.body
 		const { user } = req
 
-		console.log(user)
 		const aUser = await User.findOne({ _id: user.userId })
 
 		if (!aUser.isAdmin) {
@@ -26,7 +25,6 @@ router.post('/create', auth, async (req,res) => {
 		const post = new Post({
 			title, cover, content, author, date, tags, preview
 		})
-
 		await post.save()
 
 		res.status(201).json({

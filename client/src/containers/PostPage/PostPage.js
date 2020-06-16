@@ -14,20 +14,20 @@ const PostPage = props => {
 	const pageContent = post => (
 		post ?
 			<div>
-				{console.log('render')}
-				<h2>{post.title}</h2>
+				<h2 style={{color: 'gray'}}
+				>{post.title}</h2>
 
 				<ReactMarkdown
 					source={post.content}
 				/>
 
-				<p>{post.author.name}</p>
-				<p>{post.date}</p>
+				<p style={{color: 'rgb(162,177,191)'}}
+				>{post.author.name}</p>
+				<p style={{color: 'rgb(126,154,160)'}}
+				>{post.date}</p>
 			</div>
 			: <Loader/>
 	)
-
-	console.log(props, props.post)
 
 	return (
 		<div className='PostPage'>
