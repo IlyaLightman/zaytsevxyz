@@ -27,7 +27,7 @@ function App() {
 					<Route path='/blog' component={BlogPage} />
 					<Route path='/create' component={PostCreator} />
 					<Route exact path='/' component={MainPage} />
-					<Redirect to='/' />
+					{/*<Redirect to='/' />*/}
 				</Layout>
 			</Switch>
 		</AuthContext.Provider>
