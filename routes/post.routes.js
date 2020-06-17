@@ -11,20 +11,20 @@ router.post('/create', auth, async (req,res) => {
 		const {
 			title, cover, content, author, date, tags, preview
 		} = req.body
+		const { user } = req
 
-		const user = await User.findOne({ _id: author.userId })
+		const aUser = await User.findOne({ _id: user.userId })
 
-		if (!user.isAdmin) {
+		if (!aUser.isAdmin) {
 			res.status(500).json({
 				message: 'У вас нет прав'
 			})
 		}
-		author.name = user.nickname
+		author.name = aUser.nickname
 
 		const post = new Post({
 			title, cover, content, author, date, tags, preview
 		})
-
 		await post.save()
 
 		res.status(201).json({

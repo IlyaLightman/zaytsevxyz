@@ -57,12 +57,12 @@ const BlogPage = props => {
 				<NavLink to='/create'>Создать пост</NavLink> : null
 			}
 
-			<PostBlock
-				cover='https://avatars.mds.yandex.net/get-pdb/1774156/c29007c1-a75a-4f7a-b761-4c271d896d54/s1200?webp=false'
-				preview='Что как дела как где что'
-				title='Добрый вечер'
-				date='30.05.20'
-			/>
+			{/*<PostBlock*/}
+			{/*	cover='https://avatars.mds.yandex.net/get-pdb/1774156/c29007c1-a75a-4f7a-b761-4c271d896d54/s1200?webp=false'*/}
+			{/*	preview='Что как дела как где что'*/}
+			{/*	title='Добрый вечер'*/}
+			{/*	date='30.05.20'*/}
+			{/*/>*/}
 
 			<div>
 				<Button

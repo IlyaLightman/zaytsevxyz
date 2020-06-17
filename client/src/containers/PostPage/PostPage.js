@@ -12,27 +12,29 @@ const PostPage = props => {
 	}, [])
 
 	const pageContent = post => (
-		<div className='PostPage'>
-			{console.log('render')}
-			{/*<h2>{post.title}</h2>*/}
+		post ?
+			<div>
+				<h2 style={{color: 'gray'}}
+				>{post.title}</h2>
 
-			{/*<ReactMarkdown*/}
-			{/*	source={post.content}*/}
-			{/*/>*/}
+				<ReactMarkdown
+					source={post.content}
+				/>
 
-			{/*<p>{post.author.name}</p>*/}
-			{/*<p>{post.date}</p>*/}
-
-			<p>post</p>
-		</div>
+				<p style={{color: 'rgb(162,177,191)'}}
+				>{post.author.name}</p>
+				<p style={{color: 'rgb(126,154,160)'}}
+				>{post.date}</p>
+			</div>
+			: <Loader/>
 	)
 
-	console.log(props, props.post)
-
 	return (
-		props.loading ? <Loader /> : (
-			pageContent(props.post)
-		)
+		<div className='PostPage'>
+			<div className="Content">
+				{pageContent(props.post)}
+			</div>
+		</div>
 	)
 }
 
