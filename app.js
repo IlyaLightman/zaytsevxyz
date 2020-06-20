@@ -1,13 +1,16 @@
+const forceSSL = require('express-force-ssl')
 const mongoose = require('mongoose')
 const express = require('express')
 const config = require('config')
 const https = require('https')
+const http = require('http')
 const path = require('path')
 const fs = require('fs')
 
 const app = express()
 
 app.use(express.json({ extended: true }))
+app.use(forceSSL)
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/post', require('./routes/post.routes'))
@@ -40,6 +43,8 @@ async function start() {
 			useUnifiedTopology: true,
 			useCreateIndex: true
 		})
+
+		http.createServer(app).listen(80);
 
 		https.createServer(httpsOptions, app).listen(PORT, () => {
 			console.log(`App has been started on port ${PORT}... `)
