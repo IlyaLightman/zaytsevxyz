@@ -34,6 +34,12 @@ const schema = new Schema({
 		{
 			tag: String
 		}
+	],
+	comments: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Comment'
+		}
 	]
 })
 

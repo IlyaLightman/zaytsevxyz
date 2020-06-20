@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchPostById } from '../../store/actions/post'
 import ReactMarkdown from 'react-markdown'
 import Loader from '../../components/UI/Loaders/Loader/Loader'
+import Button from '../../components/UI/Buttons/Button/Button';
 
 const PostPage = props => {
 	useEffect(() => {
@@ -25,6 +26,22 @@ const PostPage = props => {
 				>{post.author.name}</p>
 				<p style={{color: 'rgb(126,154,160)'}}
 				>{post.date}</p>
+
+				<div className='Buttons'>
+					<Button
+						type='primary'
+						theme='dark'
+						title='Комментировать'
+						onClick={() => {}}
+					/>
+
+					<Button
+						type='primary'
+						theme='light'
+						title='❤'
+						onClick={() => {}}
+					/>
+				</div>
 			</div>
 			: <Loader/>
 	)
@@ -34,6 +51,10 @@ const PostPage = props => {
 			<div className="Content">
 				{pageContent(props.post)}
 			</div>
+
+
+
+
 		</div>
 	)
 }
