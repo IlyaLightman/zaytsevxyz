@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const express = require('express')
 const config = require('config')
+const https = require('https')
 const path = require('path')
+const fs = require('fs')
 
 const app = express()
 
@@ -20,6 +22,15 @@ if (process.env.NODE_ENV === 'production') {
 	})
 }
 
+const httpsOptions = {
+	key: fs.readFileSync(path.resolve(
+		__dirname, 'ssl', 'server.key'), 'utf-8'),
+	cert: fs.readFileSync(path.resolve(
+		__dirname, 'ssl', 'certificate.crt'), 'utf-8'),
+	ca: fs.readFileSync(path.resolve(
+		__dirname, 'ssl', 'certificate_ca.crt'), 'utf-8')
+}
+
 const PORT = config.get('PORT')
 
 async function start() {
@@ -30,7 +41,11 @@ async function start() {
 			useCreateIndex: true
 		})
 
-		app.listen(PORT, () => console.log(`App has been started on port ${PORT}... `))
+		https.createServer(httpsOptions, app).listen(PORT, () => {
+			console.log(`App has been started on port ${PORT}... `)
+		})
+
+		// app.listen(PORT, () => console.log(`App has been started on port ${PORT}... `))
 	} catch (err) {
 		console.log('Server Error', err.message)
 		process.exit(1)
