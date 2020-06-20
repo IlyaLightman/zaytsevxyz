@@ -10,7 +10,6 @@ const fs = require('fs')
 const app = express()
 
 app.use(express.json({ extended: true }))
-app.use(forceSSL)
 
 app.use('/api/auth', require('./routes/auth.routes'))
 app.use('/api/post', require('./routes/post.routes'))
@@ -18,6 +17,8 @@ app.use('/api/post', require('./routes/post.routes'))
 app.use('/api/test', require('./routes/test.routes'))
 
 if (process.env.NODE_ENV === 'production') {
+	app.use(forceSSL)
+
 	app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
 	app.get('*', (req, res) => {
@@ -44,13 +45,15 @@ async function start() {
 			useCreateIndex: true
 		})
 
-		http.createServer(app).listen(80);
-
-		https.createServer(httpsOptions, app).listen(PORT, () => {
-			console.log(`App has been started on port ${PORT}... `)
+		http.createServer(app).listen(80, () => {
+			console.log(`[HTTP] App has been started on port 80... `)
 		})
 
-		// app.listen(PORT, () => console.log(`App has been started on port ${PORT}... `))
+		if (process.env.NODE_ENV === 'production') {
+			https.createServer(httpsOptions, app).listen(PORT, () => {
+				console.log(`[HTTPS] App has been started on port ${PORT}... `)
+			})
+		}
 	} catch (err) {
 		console.log('Server Error', err.message)
 		process.exit(1)
