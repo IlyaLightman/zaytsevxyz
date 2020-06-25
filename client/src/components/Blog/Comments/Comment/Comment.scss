@@ -1,0 +1,12 @@
+.Comment {
+  display: flex;
+  border: 0 solid;
+  border-radius: 15px;
+  background: rgb(183, 207, 224);
+  flex-direction: column;
+  justify-content: flex-start;
+
+  &:hover {
+    background: rgb(161, 193, 213);
+  }
+}

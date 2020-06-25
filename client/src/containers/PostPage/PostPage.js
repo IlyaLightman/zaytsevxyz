@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './PostPage.scss'
 import { connect } from 'react-redux'
 import { fetchPostById } from '../../store/actions/post'
 import ReactMarkdown from 'react-markdown'
 import Loader from '../../components/UI/Loaders/Loader/Loader'
 import Button from '../../components/UI/Buttons/Button/Button';
+import CommentCreator from '../../components/Blog/Comments/CommentCreator/CommentCreator';
 
 const PostPage = props => {
 	useEffect(() => {
 		console.log('useEffect')
 		props.fetchPostById(props.match.params.id)
 	}, [])
+
+	const [isCommentCreatorOpen, setCommentCreatorOpen] =
+		useState(false)
+
+	const commentButton = () => {
+		setCommentCreatorOpen(!isCommentCreatorOpen)
+	}
 
 	const pageContent = post => (
 		post ?
@@ -32,7 +40,7 @@ const PostPage = props => {
 						type='primary'
 						theme='dark'
 						title='Комментировать'
-						onClick={() => {}}
+						onClick={() => commentButton()}
 					/>
 
 					<Button
@@ -42,6 +50,12 @@ const PostPage = props => {
 						onClick={() => {}}
 					/>
 				</div>
+
+				{isCommentCreatorOpen ?
+					<div>
+						<CommentCreator />
+					</div>
+					: null }
 			</div>
 			: <Loader/>
 	)
@@ -51,10 +65,6 @@ const PostPage = props => {
 			<div className="Content">
 				{pageContent(props.post)}
 			</div>
-
-
-
-
 		</div>
 	)
 }
