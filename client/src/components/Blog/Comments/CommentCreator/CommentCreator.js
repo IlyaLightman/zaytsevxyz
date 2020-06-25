@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import './CommentCreator.scss'
 import LargeInput from '../../../UI/Inputs/LargeInput/LargeInput';
 import Button from '../../../UI/Buttons/Button/Button';
+import useHttp from '../../../../hooks/http.hook';
 
 const CommentCreator = props => {
 	const {
-		post, author
+		postId, token
 	} = props
 
 	const [comment, setComment] = useState('')
+
+	const { request, error, loading } = useHttp()
 
 	const changeHandler = text => {
 		setComment(text)

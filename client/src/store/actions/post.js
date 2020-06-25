@@ -58,6 +58,21 @@ export function createPost(post, token) {
 	}
 }
 
+export function createComment(postId, userId, comment, token) {
+	return async dispatch => {
+
+		try {
+			await request(
+				'/api/comment/create', 'POST',
+				{postId, userId, comment}, {
+					Authorization: `Bearer ${token}`
+				})
+		} catch (err) {
+
+		}
+	}
+}
+
 export function fetchPostsStart() {
 	return {
 		type: FETCH_POSTS_START

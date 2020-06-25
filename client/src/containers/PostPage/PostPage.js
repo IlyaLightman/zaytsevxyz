@@ -6,8 +6,11 @@ import ReactMarkdown from 'react-markdown'
 import Loader from '../../components/UI/Loaders/Loader/Loader'
 import Button from '../../components/UI/Buttons/Button/Button';
 import CommentCreator from '../../components/Blog/Comments/CommentCreator/CommentCreator';
+import useAuth from '../../hooks/auth.hook';
 
 const PostPage = props => {
+	const { token } = useAuth()
+
 	useEffect(() => {
 		console.log('useEffect')
 		props.fetchPostById(props.match.params.id)
@@ -23,16 +26,16 @@ const PostPage = props => {
 	const pageContent = post => (
 		post ?
 			<div>
-				<h2 style={{color: 'gray'}}
+				<h2 style={{ color: 'gray' }}
 				>{post.title}</h2>
 
 				<ReactMarkdown
 					source={post.content}
 				/>
 
-				<p style={{color: 'rgb(162,177,191)'}}
+				<p style={{ color: 'rgb(162,177,191)' }}
 				>{post.author.name}</p>
-				<p style={{color: 'rgb(126,154,160)'}}
+				<p style={{ color: 'rgb(126,154,160)' }}
 				>{post.date}</p>
 
 				<div className='Buttons'>
@@ -47,15 +50,22 @@ const PostPage = props => {
 						type='primary'
 						theme='light'
 						title='❤'
-						onClick={() => {}}
+						onClick={() => {
+						}}
 					/>
 				</div>
 
-				{isCommentCreatorOpen ?
-					<div>
-						<CommentCreator />
-					</div>
-					: null }
+				{token ?
+					isCommentCreatorOpen ?
+						<div>
+							<CommentCreator
+								postId={props.match.params.id}
+								token={token}
+							/>
+						</div>
+						: null
+					: <p>Вам необходимо авторизоваться, чтобы оставить комментарий ;)</p>}
+
 			</div>
 			: <Loader/>
 	)
