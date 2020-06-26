@@ -1,4 +1,6 @@
 import {
+	CREATE_COMMENT_ERROR,
+	CREATE_COMMENT_START, CREATE_COMMENT_SUCCESS,
 	CREATE_POST_ERROR,
 	CREATE_POST_START,
 	CREATE_POST_SUCCESS,
@@ -42,6 +44,18 @@ export default function postReducer(state = initialState, action) {
 		case FETCH_POST_ERROR:
 			return {
 				...state, loading: false, error: action.error
+			}
+		case CREATE_COMMENT_START:
+			return {
+				...state, loading: true
+			}
+		case CREATE_COMMENT_SUCCESS:
+			return {
+				...state, loading: false, post: { ...state.post, comments: [...state.post.comments, action.comment]}
+			}
+		case CREATE_COMMENT_ERROR:
+			return {
+
 			}
 		case CREATE_POST_START:
 			return {

@@ -8,10 +8,10 @@ const router = Router()
 
 router.post('/create', auth, async (req, res) => {
 	try {
-		const { postId, comment } = req.body
+		const { comment, postId } = req.body
 		const { user } = req
 
-		const currentUser = User.findOne({ _id: user.userId })
+		const currentUser = await User.findOne({ _id: user.userId })
 
 		const newComment = new Comment({
 			content: comment, author: {
@@ -20,14 +20,24 @@ router.post('/create', auth, async (req, res) => {
 			}
 		})
 
-		const post = Post.findOne({ _id: postId })
+		console.log('postId', postId, 'comment', comment)
+
+		const post = await Post.findOne({ _id: postId })
+
+		console.log(newComment)
 
 		post.comments.push(newComment)
 
-		res.status(201)
+		console.log(post.comments)
+
+		await post.save()
+
+		res.status(201).json(newComment)
 	} catch (err) {
 		res.status(500).json({
 			message: err
 		})
 	}
 })
+
+module.exports = router

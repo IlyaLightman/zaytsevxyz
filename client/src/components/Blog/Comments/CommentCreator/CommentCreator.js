@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './CommentCreator.scss'
+import { connect } from 'react-redux'
 import LargeInput from '../../../UI/Inputs/LargeInput/LargeInput';
 import Button from '../../../UI/Buttons/Button/Button';
-import useHttp from '../../../../hooks/http.hook';
+import { createComment } from '../../../../store/actions/post';
 
 const CommentCreator = props => {
 	const {
@@ -11,14 +12,12 @@ const CommentCreator = props => {
 
 	const [comment, setComment] = useState('')
 
-	const { request, error, loading } = useHttp()
-
 	const changeHandler = text => {
 		setComment(text)
 	}
 
 	const createHandler = () => {
-
+		props.createComment(comment, postId, token)
 	}
 
 	return (
@@ -44,4 +43,17 @@ const CommentCreator = props => {
 	)
 }
 
-export default CommentCreator
+function mapStateToProps(state) {
+	return {
+		loading: state.post.loading
+	}
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		createComment: (comment, postId, token) =>
+			dispatch(createComment(comment, postId, token))
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentCreator)

@@ -1,4 +1,6 @@
 import {
+	CREATE_COMMENT_ERROR,
+	CREATE_COMMENT_START, CREATE_COMMENT_SUCCESS,
 	CREATE_POST_ERROR,
 	CREATE_POST_START, CREATE_POST_SUCCESS, FETCH_POST_ERROR, FETCH_POST_START, FETCH_POST_SUCCESS,
 	FETCH_POSTS_ERROR,
@@ -58,17 +60,20 @@ export function createPost(post, token) {
 	}
 }
 
-export function createComment(postId, userId, comment, token) {
+export function createComment(comment, postId, token) {
 	return async dispatch => {
+		dispatch(createCommentStart())
 
 		try {
-			await request(
+			const body = await request(
 				'/api/comment/create', 'POST',
-				{postId, userId, comment}, {
+				{postId, comment}, {
 					Authorization: `Bearer ${token}`
 				})
-		} catch (err) {
 
+			dispatch(createCommentSuccess(body.comment))
+		} catch (err) {
+			dispatch(createCommentError())
 		}
 	}
 }
@@ -110,6 +115,25 @@ export function fetchPostError(err) {
 	return {
 		type: FETCH_POST_ERROR,
 		error: err
+	}
+}
+
+export function createCommentStart() {
+	return {
+		type: CREATE_COMMENT_START
+	}
+}
+
+export function createCommentSuccess(comment) {
+	return {
+		type: CREATE_COMMENT_SUCCESS,
+		comment
+	}
+}
+
+export function createCommentError() {
+	return {
+		type: CREATE_COMMENT_ERROR
 	}
 }
 
