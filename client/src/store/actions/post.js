@@ -45,8 +45,6 @@ export function createPost(post, token) {
 			...post, date: Date.now(), tags: []
 		}
 
-		console.log(post)
-
 		try {
 			await request(
 				'/api/post/create', 'POST', post, {
@@ -65,14 +63,15 @@ export function createComment(comment, postId, token) {
 		dispatch(createCommentStart())
 
 		try {
-			const body = await request(
+			const newComment = await request(
 				'/api/comment/create', 'POST',
 				{postId, comment}, {
 					Authorization: `Bearer ${token}`
 				})
 
-			dispatch(createCommentSuccess(body.comment))
+			dispatch(createCommentSuccess(newComment))
 		} catch (err) {
+			console.log(err)
 			dispatch(createCommentError())
 		}
 	}

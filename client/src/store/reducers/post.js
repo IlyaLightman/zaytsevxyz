@@ -55,7 +55,7 @@ export default function postReducer(state = initialState, action) {
 			}
 		case CREATE_COMMENT_ERROR:
 			return {
-
+				...state
 			}
 		case CREATE_POST_START:
 			return {
@@ -67,7 +67,7 @@ export default function postReducer(state = initialState, action) {
 			}
 		case CREATE_POST_ERROR:
 			return {
-				...state,
+				...state
 			}
 		default:
 			return state
