@@ -62,6 +62,7 @@ const PostPage = props => {
 							<CommentCreator
 								postId={props.match.params.id}
 								token={token}
+								closeCreator={commentButton}
 							/>
 						</div>
 						: null

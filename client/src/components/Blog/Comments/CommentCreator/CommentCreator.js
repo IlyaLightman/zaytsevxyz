@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import LargeInput from '../../../UI/Inputs/LargeInput/LargeInput';
 import Button from '../../../UI/Buttons/Button/Button';
 import { createComment } from '../../../../store/actions/post';
+import Loader from '../../../UI/Loaders/Loader/Loader';
 
 const CommentCreator = props => {
 	const {
-		postId, token
+		postId, token, closeCreator
 	} = props
 
 	const [comment, setComment] = useState('')
@@ -18,9 +19,11 @@ const CommentCreator = props => {
 
 	const createHandler = () => {
 		props.createComment(comment, postId, token)
+		closeCreator()
 	}
 
 	return (
+		props.loading ? <Loader /> :
 		<div className='CommentCreator'>
 			<LargeInput
 				title='Ваш комментарий'
