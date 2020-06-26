@@ -7,6 +7,7 @@ import Loader from '../../components/UI/Loaders/Loader/Loader'
 import Button from '../../components/UI/Buttons/Button/Button';
 import CommentCreator from '../../components/Blog/Comments/CommentCreator/CommentCreator';
 import useAuth from '../../hooks/auth.hook';
+import CommentsBlock from '../../components/Blog/Comments/CommentsBlock/CommentsBlock';
 
 const PostPage = props => {
 	const { token } = useAuth()
@@ -64,7 +65,14 @@ const PostPage = props => {
 							/>
 						</div>
 						: null
-					: <p>Вам необходимо авторизоваться, чтобы оставить комментарий ;)</p>}
+					: <p>Вам необходимо авторизоваться, чтобы оставить комментарий ;)</p>
+				}
+
+				<div>
+					<CommentsBlock
+						comments={post.comments}
+					/>
+				</div>
 
 			</div>
 			: <Loader/>

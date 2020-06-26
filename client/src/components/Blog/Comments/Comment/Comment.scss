@@ -5,8 +5,10 @@
   background: rgb(183, 207, 224);
   flex-direction: column;
   justify-content: flex-start;
+  transition: 0.33s;
 
   &:hover {
+    border-radius: 10px;
     background: rgb(161, 193, 213);
   }
 }
