@@ -2,13 +2,15 @@
   display: flex;
   border: 0 solid;
   border-radius: 15px;
-  background: rgb(183, 207, 224);
+  padding: 10px;
+  margin: 10px;
+  background: rgb(236, 242, 246);
   flex-direction: column;
   justify-content: flex-start;
   transition: 0.33s;
 
   &:hover {
     border-radius: 10px;
-    background: rgb(161, 193, 213);
+    background: rgb(200, 223, 238);
   }
 }

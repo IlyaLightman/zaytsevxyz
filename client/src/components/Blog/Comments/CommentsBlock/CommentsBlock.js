@@ -7,13 +7,20 @@ const CommentsBlock = props => {
 		comments
 	} = props
 
+	const renderComments = () => (
+		comments.map((comment, index) => (
+			<Comment
+				author={comment.author}
+				content={comment.content}
+				date={comment.date}
+				key={index}
+			/>
+		))
+	)
+
 	return (
 		<div className='CommentsBlock'>
-			<Comment
-				author={comments[0].author}
-				content={comments[0].content}
-				date={comments[0].date}
-			/>
+			{renderComments()}
 		</div>
 	)
 }

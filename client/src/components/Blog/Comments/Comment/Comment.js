@@ -8,17 +8,17 @@ const Comment = props => {
 
 	return <div className='Comment'>
 		<p style={{
-			fontSize: '23px'
+			fontSize: '23px', margin: '5px 5px 7px 5px'
 		}}
 		>{author.name}</p>
 
 		<p style={{
-			fontSize: '17px'
+			fontSize: '17px', margin: '5px 5px 5px 5px'
 		}}
 		>{content}</p>
 
 		<p style={{
-			fontSize: '15px'
+			fontSize: '15px', margin: '5px 5px 5px 5px', color: 'rgb(119,152,167)'
 		}}
 		>{date}</p>
 	</div>
